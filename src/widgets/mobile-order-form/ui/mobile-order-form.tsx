@@ -200,6 +200,13 @@ export function MobileOrderForm() {
       return;
     }
 
+    if (generateOut && !payboxId.trim()) {
+      toast.error(
+        "Выберите счёт (кассу): без неё CRM часто не фиксирует оплату по документу",
+      );
+      return;
+    }
+
     const totalPaid = lines.reduce(
       (s, l) => s + l.quantity * l.unitPrice,
       0,
@@ -214,7 +221,13 @@ export function MobileOrderForm() {
       comment: comment.trim() || undefined,
       /** «Реализация» + проведение — иначе CRM часто не фиксирует оплату по `paid_rubles`. */
       operation: generateOut ? "Реализация" : "Заказ",
-      paid_rubles: paidRounded,
+      ...(generateOut
+        ? {
+            status: true,
+            paid_rubles: paidRounded,
+            paid_doc: paidRounded,
+          }
+        : { paid_rubles: paidRounded }),
       goods: lines.map((l) => ({
         nomenclature: l.nomenclature.id,
         nomenclature_name: l.nomenclature.name,

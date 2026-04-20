@@ -20,8 +20,10 @@ export type CreateSalePayload = {
   goods: SaleGoodItem[];
   /** По схеме API — булев статус документа */
   status?: boolean;
-  /** Сумма оплаты в рублях (для «Реализация» + проведение — иначе в CRM часто «Не оплачен»). */
+  /** Сумма оплаты в рублях (наличные и т.п.). */
   paid_rubles?: number;
+  /** В ответе CRM рядом с paid_rubles; часто нужно при создании, иначе сумма не пишется. */
+  paid_doc?: number;
   paid_lt?: number;
 };
 
