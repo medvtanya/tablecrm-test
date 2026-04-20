@@ -15,11 +15,12 @@ export type CreateSalePayload = {
   paybox?: number;
   warehouse?: number;
   comment?: string;
+  /** «Заказ» — заявка; «Реализация» — продажа (для отражения оплаты при проведении). */
   operation?: "Заказ" | "Реализация";
   goods: SaleGoodItem[];
   /** По схеме API — булев статус документа */
   status?: boolean;
-  /** Оплачено рублями (иначе в CRM часто «Не оплачен») */
+  /** Сумма оплаты в рублях (для «Реализация» + проведение — иначе в CRM часто «Не оплачен»). */
   paid_rubles?: number;
   paid_lt?: number;
 };

@@ -212,7 +212,8 @@ export function MobileOrderForm() {
       paybox: payboxId ? Number(payboxId) : undefined,
       warehouse: warehouseId ? Number(warehouseId) : undefined,
       comment: comment.trim() || undefined,
-      operation: "Заказ",
+      /** «Реализация» + проведение — иначе CRM часто не фиксирует оплату по `paid_rubles`. */
+      operation: generateOut ? "Реализация" : "Заказ",
       paid_rubles: paidRounded,
       goods: lines.map((l) => ({
         nomenclature: l.nomenclature.id,
