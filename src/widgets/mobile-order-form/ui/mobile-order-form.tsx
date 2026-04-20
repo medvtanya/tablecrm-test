@@ -212,9 +212,11 @@ export function MobileOrderForm() {
       0,
     );
     const paidRounded = Math.round(totalPaid * 100) / 100;
+    const datedUnixSeconds = Math.floor(Date.now() / 1000);
 
     const payload: CreateSalePayload = {
       organization: Number(organizationId),
+      dated: datedUnixSeconds,
       contragent: contragent?.id,
       paybox: payboxId ? Number(payboxId) : undefined,
       warehouse: warehouseId ? Number(warehouseId) : undefined,

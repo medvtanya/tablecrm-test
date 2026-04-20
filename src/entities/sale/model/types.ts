@@ -15,6 +15,8 @@ export type CreateSalePayload = {
   paybox?: number;
   warehouse?: number;
   comment?: string;
+  /** Дата документа, Unix time в секундах (без этого в CRM часто `null` → отображается как 01.01.1970). */
+  dated?: number;
   /** «Заказ» — заявка; «Реализация» — продажа (для отражения оплаты при проведении). */
   operation?: "Заказ" | "Реализация";
   goods: SaleGoodItem[];
