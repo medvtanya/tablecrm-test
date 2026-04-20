@@ -5,6 +5,9 @@ import {
 } from "@/shared/config";
 import { NextRequest, NextResponse } from "next/server";
 
+/** Лимит времени ответа на Vercel (сек.); см. https://vercel.com/docs/functions/runtimes */
+export const maxDuration = 60;
+
 const TOKEN_HEADER = "x-tablecrm-token";
 
 function buildApiPath(pathSegments: string[]): string {

@@ -1,5 +1,15 @@
-/** Публичный origin API (прокси на сервере Next). */
-export const TABLECRM_PUBLIC_ORIGIN = "https://app.tablecrm.com/api/v1";
+/** Публичный origin API (прокси на сервере Next). Переопределяется через `TABLECRM_PUBLIC_ORIGIN` на Vercel. */
+const DEFAULT_TABLECRM_ORIGIN = "https://app.tablecrm.com/api/v1";
+
+function normalizeOrigin(raw: string | undefined): string {
+  const t = raw?.trim();
+  if (!t) return DEFAULT_TABLECRM_ORIGIN;
+  return t.replace(/\/+$/, "");
+}
+
+export const TABLECRM_PUBLIC_ORIGIN = normalizeOrigin(
+  process.env.TABLECRM_PUBLIC_ORIGIN,
+);
 
 const ALLOWED_SEGMENTS = new Set([
   "contragents",
